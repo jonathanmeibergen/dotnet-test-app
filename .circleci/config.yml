@@ -8,5 +8,10 @@
      executor: win/default     
     
      steps:
-       - checkout
-       - run: dotnet build
+      - checkout
+      - run: dotnet restore
+      - run: dotnet build
+      - run:
+          name: "Run Application Tests"
+          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+      - run: dotnet run
